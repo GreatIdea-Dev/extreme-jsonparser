@@ -55,7 +55,7 @@ function App() {
   const [tableData, setTableData] = createSignal<JSX.Element>();
   const [entryData, setEntryData] = createSignal<EntryData[]>([defaultData]);
   const [endpointUrl, setEndpointUrl] = createSignal(
-    "http://172.16.60.2/rest/restconf/data/openconfig-network-instance:network-instances/network-instance=VR-Default/fdb?formatted=true"
+    "https://172.16.60.2/rest/restconf/data/openconfig-network-instance:network-instances/network-instance=VR-Default/fdb?formatted=true"
   );
 
   const entries = entryData();
