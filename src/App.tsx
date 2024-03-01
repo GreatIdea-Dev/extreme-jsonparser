@@ -372,6 +372,7 @@ function App() {
       <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
         <h1>Extreme Networks Instance API</h1>
         <p class="text-xl">Enter information to update the API endpoint.</p>
+
         <p class="text-xl italic font-light text-neutral-400">
           Note: you may need to allow mixed content from your browser for these
           requests to work!
@@ -405,9 +406,9 @@ function App() {
           </div>
           <div class="w-full flex flex-row justify-start items-center">
             <div class="w-56 gap-3 flex flex-row justify-center items-center">
-              <button class="apiButton" onClick={handleUpdateToken}>
+              <a class="apiButton" onClick={handleUpdateToken}>
                 Update API Token
-              </button>
+              </a>
             </div>
           </div>
           <div class="flex flex-row justify-start items-center w-full py-4">
@@ -450,14 +451,14 @@ function App() {
           </div>
           <div class="w-full flex flex-row justify-start items-center gap-3">
             <div class="w-auto min-w-56 gap-3 flex flex-row justify-center items-center">
-              <button class="apiButton" onClick={handleUpdateUrl}>
+              <a class="apiButton" onClick={handleUpdateUrl}>
                 Update URL
-              </button>
+              </a>
             </div>
             <div class="w-auto min-w-56  gap-3 flex flex-row justify-center items-center">
-              <button class="apiButton" onClick={handlRetrieveNetworkInstance}>
+              <a class="apiButton" onClick={handlRetrieveNetworkInstance}>
                 Get Network Instance
-              </button>
+              </a>
             </div>
           </div>
           <div class="flex flex-col justify-center items-start w-full py-4">
@@ -471,13 +472,9 @@ function App() {
             </p>
           </div>
           <div class="w-full my-4 flex flex-row justify-start items-center">
-            <button
-              disabled={!apiToken()}
-              class="apiButton"
-              onClick={handleApiCall}
-            >
+            <a class="apiButton" onClick={handleApiCall}>
               Update Table from API
-            </button>
+            </a>
           </div>
         </div>
         <div class="flex flex-row flex-start items-center w-full">
