@@ -79,7 +79,7 @@ const setInitialCookie = () => {
   }
 };
 
-//"https://172.16.60.2/rest/restconf/data/openconfig-network-instance:network-instances/network-instance=VR-Default/fdb?formatted=true"
+//"http://172.16.60.2/rest/restconf/data/openconfig-network-instance:network-instances/network-instance=VR-Default/fdb?formatted=true"
 
 function App() {
   setInitialCookie();
@@ -244,7 +244,7 @@ function App() {
   };
 
   const handlRetrieveNetworkInstance = async () => {
-    const url = `https://${endpointIp()}/rest/restconf/data/openconfig-network-instance:network-instances/`;
+    const url = `http://${endpointIp()}/rest/restconf/data/openconfig-network-instance:network-instances/`;
 
     await fetch(url, {
       headers: {
@@ -292,7 +292,7 @@ function App() {
   };
 
   const handleApiCall = async () => {
-    const url = `https://${endpointIp()}/restconf/data/openconfig-network-instance:network-instances/network-instance=${networkInstance()}/fdb?formatted=true`;
+    const url = `http://${endpointIp()}/restconf/data/openconfig-network-instance:network-instances/network-instance=${networkInstance()}/fdb?formatted=true`;
     console.log(url, {
       headers: {
         "Content-Type": "application/json",
@@ -335,7 +335,7 @@ function App() {
       .value;
     const pass = (document.querySelector("#passInput") as HTMLInputElement)
       .value;
-    const url = `https://${endpointIp()}/auth/token`;
+    const url = `http://${endpointIp()}/auth/token`;
     console.log(url, {
       headers: {
         "Content-Type": "application/json",
@@ -462,7 +462,7 @@ function App() {
             </p>
             <p class="py-1 italic text-sm text-neutral-500">
               {
-                `https://${endpointIp()}/restconf/data/openconfig-network-instance:network-instances/network-instance=${networkInstance()}/fdb?formatted=true` as unknown as string
+                `http://${endpointIp()}/restconf/data/openconfig-network-instance:network-instances/network-instance=${networkInstance()}/fdb?formatted=true` as unknown as string
               }
             </p>
           </div>
