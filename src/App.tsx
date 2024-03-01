@@ -372,6 +372,10 @@ function App() {
       <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
         <h1>Extreme Networks Instance API</h1>
         <p class="text-xl">Enter information to update the API endpoint.</p>
+        <p class="text-xl italic font-light text-neutral-400">
+          Note: you may need to allow mixed content from your browser for these
+          requests to work!
+        </p>
       </div>
       <div class="w-full flex flex-col justify-center items-start gap-4 py-4">
         <div class="flex w-full justify-start items-center flex-col">
