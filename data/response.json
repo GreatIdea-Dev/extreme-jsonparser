@@ -1,0 +1,380 @@
+{
+  "openconfig-network-instance:fdb": {
+    "config": {
+      "mac-learning": true,
+      "maximum-entries": 524288,
+      "mac-aging-time": 300
+    },
+    "state": {
+      "mac-learning": true,
+      "maximum-entries": 524288,
+      "mac-aging-time": 300
+    },
+    "mac-table": {
+      "entries": {
+        "entry": [
+          {
+            "mac-address": "00:04:96:b4:39:25",
+            "config": { "mac-address": "00:04:96:b4:39:25", "vlan": 50 },
+            "state": {
+              "mac-address": "00:04:96:b4:39:25",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1013 },
+                "state": { "interface": "FWL", "subinterface": 1013 }
+              }
+            }
+          },
+          {
+            "mac-address": "00:0c:29:04:09:6e",
+            "config": { "mac-address": "00:0c:29:04:09:6e", "vlan": 60 },
+            "state": {
+              "mac-address": "00:0c:29:04:09:6e",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1001 },
+                "state": { "interface": "LAB", "subinterface": 1001 }
+              }
+            }
+          },
+          {
+            "mac-address": "00:0c:29:0a:7f:83",
+            "config": { "mac-address": "00:0c:29:0a:7f:83", "vlan": 60 },
+            "state": {
+              "mac-address": "00:0c:29:0a:7f:83",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1002 },
+                "state": { "interface": "LAB", "subinterface": 1002 }
+              }
+            }
+          },
+          {
+            "mac-address": "00:0c:29:2c:2d:ce",
+            "config": { "mac-address": "00:0c:29:2c:2d:ce", "vlan": 60 },
+            "state": {
+              "mac-address": "00:0c:29:2c:2d:ce",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1001 },
+                "state": { "interface": "LAB", "subinterface": 1001 }
+              }
+            }
+          },
+          {
+            "mac-address": "00:0c:29:37:ba:ea",
+            "config": { "mac-address": "00:0c:29:37:ba:ea", "vlan": 60 },
+            "state": {
+              "mac-address": "00:0c:29:37:ba:ea",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1001 },
+                "state": { "interface": "LAB", "subinterface": 1001 }
+              }
+            }
+          },
+          {
+            "mac-address": "00:0c:29:4b:35:2d",
+            "config": { "mac-address": "00:0c:29:4b:35:2d", "vlan": 60 },
+            "state": {
+              "mac-address": "00:0c:29:4b:35:2d",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1001 },
+                "state": { "interface": "LAB", "subinterface": 1001 }
+              }
+            }
+          },
+          {
+            "mac-address": "00:0c:29:7e:d4:af",
+            "config": { "mac-address": "00:0c:29:7e:d4:af", "vlan": 60 },
+            "state": {
+              "mac-address": "00:0c:29:7e:d4:af",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1001 },
+                "state": { "interface": "LAB", "subinterface": 1001 }
+              }
+            }
+          },
+          {
+            "mac-address": "00:0c:29:a7:f4:0f",
+            "config": { "mac-address": "00:0c:29:a7:f4:0f", "vlan": 60 },
+            "state": {
+              "mac-address": "00:0c:29:a7:f4:0f",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1001 },
+                "state": { "interface": "LAB", "subinterface": 1001 }
+              }
+            }
+          },
+          {
+            "mac-address": "00:0c:29:b9:b3:95",
+            "config": { "mac-address": "00:0c:29:b9:b3:95", "vlan": 60 },
+            "state": {
+              "mac-address": "00:0c:29:b9:b3:95",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1001 },
+                "state": { "interface": "LAB", "subinterface": 1001 }
+              }
+            }
+          },
+          {
+            "mac-address": "0c:08:b4:49:91:cc",
+            "config": { "mac-address": "0c:08:b4:49:91:cc", "vlan": 50 },
+            "state": {
+              "mac-address": "0c:08:b4:49:91:cc",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1011 },
+                "state": { "interface": "FWL", "subinterface": 1011 }
+              }
+            }
+          },
+          {
+            "mac-address": "24:1f:bd:57:d2:80",
+            "config": { "mac-address": "24:1f:bd:57:d2:80", "vlan": 50 },
+            "state": {
+              "mac-address": "24:1f:bd:57:d2:80",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1013 },
+                "state": { "interface": "FWL", "subinterface": 1013 }
+              }
+            }
+          },
+          {
+            "mac-address": "24:5e:be:34:af:9c",
+            "config": { "mac-address": "24:5e:be:34:af:9c", "vlan": 60 },
+            "state": {
+              "mac-address": "24:5e:be:34:af:9c",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1013 },
+                "state": { "interface": "LAB", "subinterface": 1013 }
+              }
+            }
+          },
+          {
+            "mac-address": "3c:a8:2a:13:4e:90",
+            "config": { "mac-address": "3c:a8:2a:13:4e:90", "vlan": 60 },
+            "state": {
+              "mac-address": "3c:a8:2a:13:4e:90",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1001 },
+                "state": { "interface": "LAB", "subinterface": 1001 }
+              }
+            }
+          },
+          {
+            "mac-address": "58:59:c2:d8:f1:40",
+            "config": { "mac-address": "58:59:c2:d8:f1:40", "vlan": 50 },
+            "state": {
+              "mac-address": "58:59:c2:d8:f1:40",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1011 },
+                "state": { "interface": "FWL", "subinterface": 1011 }
+              }
+            }
+          },
+          {
+            "mac-address": "80:38:fb:73:4e:07",
+            "config": { "mac-address": "80:38:fb:73:4e:07", "vlan": 60 },
+            "state": {
+              "mac-address": "80:38:fb:73:4e:07",
+              "vlan": 60,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "LAB", "subinterface": 1009 },
+                "state": { "interface": "LAB", "subinterface": 1009 }
+              }
+            }
+          },
+          {
+            "mac-address": "90:6c:ac:be:7e:14",
+            "config": { "mac-address": "90:6c:ac:be:7e:14", "vlan": 50 },
+            "state": {
+              "mac-address": "90:6c:ac:be:7e:14",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1012 },
+                "state": { "interface": "FWL", "subinterface": 1012 }
+              }
+            }
+          },
+          {
+            "mac-address": "94:18:65:3d:6d:91",
+            "config": { "mac-address": "94:18:65:3d:6d:91", "vlan": 50 },
+            "state": {
+              "mac-address": "94:18:65:3d:6d:91",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1007 },
+                "state": { "interface": "FWL", "subinterface": 1007 }
+              }
+            }
+          },
+          {
+            "mac-address": "a4:bb:6d:dc:6c:df",
+            "config": { "mac-address": "a4:bb:6d:dc:6c:df", "vlan": 50 },
+            "state": {
+              "mac-address": "a4:bb:6d:dc:6c:df",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1011 },
+                "state": { "interface": "FWL", "subinterface": 1011 }
+              }
+            }
+          },
+          {
+            "mac-address": "b0:27:cf:79:47:00",
+            "config": { "mac-address": "b0:27:cf:79:47:00", "vlan": 50 },
+            "state": {
+              "mac-address": "b0:27:cf:79:47:00",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1009 },
+                "state": { "interface": "FWL", "subinterface": 1009 }
+              }
+            }
+          },
+          {
+            "mac-address": "b0:27:cf:79:5c:40",
+            "config": { "mac-address": "b0:27:cf:79:5c:40", "vlan": 50 },
+            "state": {
+              "mac-address": "b0:27:cf:79:5c:40",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1007 },
+                "state": { "interface": "FWL", "subinterface": 1007 }
+              }
+            }
+          },
+          {
+            "mac-address": "b0:27:cf:8f:54:80",
+            "config": { "mac-address": "b0:27:cf:8f:54:80", "vlan": 50 },
+            "state": {
+              "mac-address": "b0:27:cf:8f:54:80",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1011 },
+                "state": { "interface": "FWL", "subinterface": 1011 }
+              }
+            }
+          },
+          {
+            "mac-address": "d8:e7:43:1f:9a:57",
+            "config": { "mac-address": "d8:e7:43:1f:9a:57", "vlan": 50 },
+            "state": {
+              "mac-address": "d8:e7:43:1f:9a:57",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1013 },
+                "state": { "interface": "FWL", "subinterface": 1013 }
+              }
+            }
+          },
+          {
+            "mac-address": "f0:f6:c1:ab:f5:be",
+            "config": { "mac-address": "f0:f6:c1:ab:f5:be", "vlan": 50 },
+            "state": {
+              "mac-address": "f0:f6:c1:ab:f5:be",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1011 },
+                "state": { "interface": "FWL", "subinterface": 1011 }
+              }
+            }
+          },
+          {
+            "mac-address": "f6:6e:8b:85:3c:e3",
+            "config": { "mac-address": "f6:6e:8b:85:3c:e3", "vlan": 50 },
+            "state": {
+              "mac-address": "f6:6e:8b:85:3c:e3",
+              "vlan": 50,
+              "entry-type": "DYNAMIC"
+            },
+            "interface": {
+              "interface-ref": {
+                "config": { "interface": "FWL", "subinterface": 1011 },
+                "state": { "interface": "FWL", "subinterface": 1011 }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

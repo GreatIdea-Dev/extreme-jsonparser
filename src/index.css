@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @apply flex flex-col justify-center items-center p-4 min-h-screen w-screen;
+  @apply bg-neutral-100 dark:bg-neutral-900;
+  @apply text-neutral-600 dark:text-neutral-200;
+}
+
+h1 {
+  @apply text-4xl font-bold;
+  @apply mb-4;
+}
+
+form {
+  @apply flex flex-row justify-center items-center p-4 w-full gap-3;
+}
+
+form div {
+  @apply flex flex-col justify-center items-start w-full gap-2;
+}
+
+form input {
+  @apply p-2;
+  @apply bg-neutral-200 dark:bg-neutral-800;
+  @apply text-neutral-600 dark:text-neutral-200 font-medium;
+  @apply placeholder-neutral-400 dark:placeholder-neutral-600;
+  @apply border border-neutral-300 dark:border-neutral-700;
+  @apply px-4 py-2 rounded-md;
+}
+
+form label {
+  @apply text-xl;
+  @apply text-neutral-600 dark:text-neutral-200;
+  @apply font-medium;
+}
+
+th { 
+  @apply w-auto text-center border border-neutral-300 dark:border-neutral-700;
+}
+
+td { 
+  @apply w-auto text-center border border-neutral-300 dark:border-neutral-700;
+}
+
+.filter {
+  @apply flex flex-row justify-center items-start px-4 py-1 w-full gap-3;
+
+}
+
+.filterInput {
+   @apply h-11;
+  @apply bg-neutral-200 dark:bg-neutral-800;
+  @apply text-neutral-600 dark:text-neutral-200 font-medium;
+  @apply placeholder-neutral-400 dark:placeholder-neutral-600;
+  @apply border border-neutral-300 dark:border-neutral-700;
+  @apply px-4 py-2 rounded-md;
+}
+
+.filterButton {
+  @apply bg-blue-500;
+  @apply w-36 h-11;
+  @apply text-neutral-200 font-medium;
+  @apply placeholder-neutral-400 dark:placeholder-neutral-600;
+  @apply border border-neutral-300 dark:border-neutral-700;
+  @apply px-4 py-2 rounded-md;
+}
