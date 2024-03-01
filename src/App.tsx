@@ -3,7 +3,7 @@ import "./App.css";
 import { JSX, createSignal } from "solid-js";
 
 function App() {
-  const [appState, setAppState] = useAppState();
+  const [appState] = useAppState();
   const [tableData, setTableData] = createSignal<JSX.Element>();
 
   const state = appState as Entry;
