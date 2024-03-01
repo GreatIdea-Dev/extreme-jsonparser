@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  @apply flex flex-col justify-center items-center p-4 min-h-screen w-screen;
+  @apply flex flex-col items-center justify-center w-screen min-h-screen p-4;
   @apply bg-neutral-100 dark:bg-neutral-900;
   @apply text-neutral-600 dark:text-neutral-200;
 }
@@ -14,13 +14,13 @@ h1 {
 }
 
 .apiForm {
-  @apply flex flex-row justify-start items-center py-4 w-full flex-wrap gap-3;
+  @apply flex flex-row flex-wrap items-center justify-start w-full gap-3 py-4;
 }
 
 .apiFormInput {
-  @apply h-11 w-full;
+  @apply w-full h-11;
   @apply bg-neutral-200 dark:bg-neutral-800;
-  @apply text-neutral-600 dark:text-neutral-200 font-medium;
+  @apply font-medium text-neutral-600 dark:text-neutral-200;
   @apply placeholder-neutral-400 dark:placeholder-neutral-600;
   @apply border border-neutral-300 dark:border-neutral-700;
   @apply px-4 py-2 rounded-md;
@@ -33,31 +33,32 @@ h1 {
 }
 
 th { 
-  @apply w-auto text-center border border-neutral-300 dark:border-neutral-700 px-4 py-1;
+  @apply w-auto px-4 py-1 text-center border border-neutral-300 dark:border-neutral-700;
 }
 
 td { 
-  @apply w-auto text-center border border-neutral-300 dark:border-neutral-700 px-4 py-1;
+  @apply w-auto px-4 py-1 text-center border border-neutral-300 dark:border-neutral-700;
 }
 
 .apiButton {
   @apply bg-purple-600 hover:bg-purple-800;
   @apply w-full h-11;
-  @apply text-neutral-200 font-medium;
+  @apply font-medium text-neutral-200;
   @apply placeholder-neutral-400 dark:placeholder-neutral-600;
   @apply border border-neutral-300 dark:border-neutral-700;
   @apply px-4 py-2 rounded-md;
+  @apply disabled:bg-red-600 disabled:opacity-10 disabled:cursor-not-allowed disabled:hover:bg-red-600;
 }
 
 .filter {
-  @apply flex flex-row justify-start items-center py-1 w-full gap-3 flex-wrap;
+  @apply flex flex-row flex-wrap items-center justify-start w-full gap-3 pb-1;
 
 }
 
 .filterInput {
-   @apply h-11 w-56;
+   @apply w-56 h-11;
   @apply bg-neutral-200 dark:bg-neutral-800;
-  @apply text-neutral-600 dark:text-neutral-200 font-medium;
+  @apply font-medium text-neutral-600 dark:text-neutral-200;
   @apply placeholder-neutral-400 dark:placeholder-neutral-600;
   @apply border border-neutral-300 dark:border-neutral-700;
   @apply px-4 py-2 rounded-md;
@@ -66,7 +67,7 @@ td {
 .filterButton {
   @apply bg-purple-600 hover:bg-purple-800;
   @apply w-36 h-11;
-  @apply text-neutral-200 font-medium;
+  @apply font-medium text-neutral-200;
   @apply placeholder-neutral-400 dark:placeholder-neutral-600;
   @apply border border-neutral-300 dark:border-neutral-700;
   @apply px-4 py-2 rounded-md;

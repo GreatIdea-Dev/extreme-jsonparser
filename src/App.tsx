@@ -51,13 +51,45 @@ const defaultData: EntryData = {
   },
 };
 
+function getCookie(cname: any) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+const setInitialCookie = () => {
+  const ip = getCookie("apiIp");
+  const networkInstance = getCookie("networkInstance");
+
+  if (!ip) {
+    document.cookie = `apiIp=172.16.60.2;`;
+  }
+  if (!networkInstance) {
+    document.cookie = `networkInstance=VR-Default;`;
+  }
+};
+
+//"https://172.16.60.2/rest/restconf/data/openconfig-network-instance:network-instances/network-instance=VR-Default/fdb?formatted=true"
+
 function App() {
+  setInitialCookie();
   const [tableData, setTableData] = createSignal<JSX.Element>();
   const [entryData, setEntryData] = createSignal<EntryData[]>([defaultData]);
-  const [endpointUrl, setEndpointUrl] = createSignal(
-    "https://172.16.60.2/rest/restconf/data/openconfig-network-instance:network-instances/network-instance=VR-Default/fdb?formatted=true"
+  const [apiToken, setApiToken] = createSignal(getCookie("api-token"));
+  const [endpointIp, setEndpointIp] = createSignal(getCookie("apiIp"));
+  const [networkInstance, setNetworkInstance] = createSignal(
+    getCookie("networkInstance")
   );
-
   const entries = entryData();
 
   setTableData(
@@ -209,25 +241,70 @@ function App() {
     }
   };
 
+  const handlRetrieveNetworkInstance = async () => {
+    const url = `https://${endpointIp()}/rest/restconf/data/openconfig-network-instance:network-instances/`;
+
+    await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `x-authtoken=${apiToken()}`,
+      },
+      method: "GET",
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        window.alert(
+          "John needs the data this button returns in the console log in order to allow proper network instance retrieval!!!"
+        );
+      });
+  };
+
   const handleUpdateUrl = () => {
     const ip = (document.querySelector("#ipInput") as HTMLInputElement).value;
-    const key = (document.querySelector("#keyInput") as HTMLInputElement).value;
-    const path = (document.querySelector("#pathInput") as HTMLInputElement)
+    const instance = (document.querySelector("#keyInput") as HTMLInputElement)
       .value;
 
-    if (ip && key && path) {
-      const apiPath = `http://${ip}${path}?${key}`;
-      setEndpointUrl(apiPath);
-      const url = endpointUrl();
-      window.alert("New URL: " + url);
+    if (ip && !instance) {
+      setEndpointIp(ip);
+      document.cookie = `apiIp=${ip};`;
+      window.alert("IP updated to " + ip);
+    } else if (instance && !ip) {
+      setNetworkInstance(instance);
+      document.cookie = `networkInstance=${instance};`;
+      window.alert("Network Instance updated to " + instance);
+    } else if (ip && instance) {
+      setEndpointIp(ip);
+      document.cookie = `apiIp=${ip};`;
+      setNetworkInstance(instance);
+      document.cookie = `networkInstance=${instance};`;
+      window.alert(
+        "URL updated to " + ip + " and Network Instance updated to " + instance
+      );
     } else {
       window.alert("URL not updated due to missing information.");
     }
   };
 
   const handleApiCall = async () => {
-    const url = endpointUrl();
-    await fetch(url)
+    const url = `https://${endpointIp()}/restconf/data/openconfig-network-instance:network-instances/network-instance=${networkInstance()}/fdb?formatted=true`;
+    console.log(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: ` x-authtoken=${apiToken()}`,
+      },
+      method: "GET",
+    });
+    await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `x-authtoken=${apiToken()}`,
+      },
+      method: "GET",
+    })
       .then((data) => {
         return data.json();
       })
@@ -250,57 +327,148 @@ function App() {
         );
       });
   };
+  const handleUpdateToken = async () => {
+    const user = (document.querySelector("#userInput") as HTMLInputElement)
+      .value;
+    const pass = (document.querySelector("#passInput") as HTMLInputElement)
+      .value;
+    const url = `https://${endpointIp()}/auth/token`;
+    console.log(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        username: user,
+        password: pass,
+      }),
+    });
+    await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        username: user,
+        password: pass,
+      }),
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        setApiToken(data.token);
+        const token = apiToken();
+        document.cookie = `api-token=${token};`;
+        window.alert("New Token: " + token);
+      });
+  };
 
   return (
     <div class="flex flex-col justify-center items-center w-screen h-full p-4 md:p-8 lg:p-16">
       <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
-        <h1>API Configuration</h1>
-        <p>Enter information to update the API endpoint.</p>
+        <h1>Extreme Network Instance API</h1>
+        <p class="text-xl">Enter information to update the API endpoint.</p>
       </div>
-      <div class="w-full flex flex-col justify-center items-start gap-4">
-        <div class="flex w-full justify-center items-center flex-col">
-          <div class="flex flex-col justify-center items-start">
-            <p class="py-1 italic text-sm text-neutral-200">
-              Current Endpoint URL:
-            </p>
-            <p class="py-1 italic text-sm text-neutral-500">
-              {endpointUrl as unknown as string}
-            </p>
+      <div class="w-full flex flex-col justify-center items-start gap-4 py-4">
+        <div class="flex w-full justify-start items-center flex-col">
+          <p class="w-full text-start italic text-neutral-400 dark:text-neutral-600">
+            Username and password will reset upon each page reload, but token
+            will be saved in browser.
+          </p>
+          <div class="apiForm">
+            <div class="flex flex-col justify-center items-start gap-2 w-2/5 min-w-56">
+              <label for="userInput">Username:</label>
+              <input
+                class="apiFormInput"
+                type="text"
+                id="userInput"
+                placeholder="Username"
+              />
+            </div>
+            <div class="flex flex-col justify-center items-start gap-2 w-2/5 min-w-56">
+              <label for="passInput">Password:</label>
+              <input
+                class="apiFormInput"
+                type="text"
+                id="passInput"
+                placeholder="@ssword"
+              />
+            </div>
+          </div>
+          <div class="w-full flex flex-row justify-start items-center">
+            <div class="w-56 gap-3 flex flex-row justify-center items-center">
+              <button class="apiButton" onClick={handleUpdateToken}>
+                Update API Token
+              </button>
+            </div>
+          </div>
+          <div class="flex flex-row justify-start items-center w-full py-4">
+            <div class="flex flex-row justify-center items-center">
+              <p class="py-1 italic text-sm text-neutral-200">
+                API Token Status:&nbsp;
+              </p>
+              {apiToken() ? (
+                <p class="py-1 italic text-sm text-green-500">Token Set</p>
+              ) : (
+                <p class="py-1 italic text-sm text-red-500">Token Not Set</p>
+              )}
+            </div>
           </div>
           <div class="apiForm">
-            <div class="flex flex-col justify-center items-start gap-2 w-1/4 min-w-56">
+            <p class="w-full text-start italic text-neutral-400 dark:text-neutral-600">
+              Switch IP and Instance Value will be stored in browser, but may
+              reset upon browser close.
+            </p>
+            <div class="flex flex-col justify-center items-start gap-2 w-2/5 min-w-56">
               <label for="ipInput">Switch IP:</label>
               <input
                 class="apiFormInput"
                 type="text"
                 id="ipInput"
-                placeholder="172.0.0.1"
+                value={endpointIp()}
+                placeholder={endpointIp()}
               />
             </div>
-            <div class="flex flex-col justify-center items-start gap-2 w-1/4 min-w-56">
-              <label for="keyInput">Key Value:</label>
+            <div class="flex flex-col justify-center items-start gap-2 w-2/5 min-w-56">
+              <label for="keyInput">Network Instance:</label>
               <input
                 class="apiFormInput"
                 type="text"
                 id="keyInput"
-                placeholder="DP_VALUE"
-              />
-            </div>
-            <div class="flex flex-col justify-center items-start gap-2 flex-1 min-w-56">
-              <label for="pathInput">API Path:</label>
-              <input
-                class="apiFormInput"
-                type="text"
-                id="pathInput"
-                placeholder="/api/info/about/switch/with/key"
+                value={networkInstance()}
+                placeholder={networkInstance()}
               />
             </div>
           </div>
-          <div class="w-full gap-3 flex flex-row justify-center items-center">
-            <button class="apiButton" onClick={handleUpdateUrl}>
-              Update URL
-            </button>
-            <button class="apiButton" onClick={handleApiCall}>
+          <div class="w-full flex flex-row justify-start items-center gap-3">
+            <div class="w-auto min-w-56 gap-3 flex flex-row justify-center items-center">
+              <button class="apiButton" onClick={handleUpdateUrl}>
+                Update URL
+              </button>
+            </div>
+            <div class="w-auto min-w-56  gap-3 flex flex-row justify-center items-center">
+              <button class="apiButton" onClick={handlRetrieveNetworkInstance}>
+                Get Network Instance
+              </button>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center items-start w-full py-4">
+            <p class="py-1 italic text-sm text-neutral-200">
+              Current Endpoint URL:
+            </p>
+            <p class="py-1 italic text-sm text-neutral-500">
+              {
+                `https://${endpointIp()}/restconf/data/openconfig-network-instance:network-instances/network-instance=${networkInstance()}/fdb?formatted=true` as unknown as string
+              }
+            </p>
+          </div>
+          <div class="w-full my-4 flex flex-row justify-start items-center">
+            <button
+              disabled={!apiToken()}
+              class="apiButton"
+              onClick={handleApiCall}
+            >
               Update Table from API
             </button>
           </div>
