@@ -370,7 +370,7 @@ function App() {
   return (
     <div class="flex flex-col justify-center items-center w-screen h-full p-4 md:p-8 lg:p-16">
       <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
-        <h1>Extreme Network Instance API</h1>
+        <h1>Extreme Networks Instance API</h1>
         <p class="text-xl">Enter information to update the API endpoint.</p>
       </div>
       <div class="w-full flex flex-col justify-center items-start gap-4 py-4">
