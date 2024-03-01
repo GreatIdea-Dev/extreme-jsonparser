@@ -14,7 +14,7 @@ h1 {
 }
 
 form {
-  @apply flex flex-row justify-center items-center p-4 w-full gap-3;
+  @apply flex flex-row justify-center items-center p-4 w-full ;
 }
 
 form div {
@@ -37,15 +37,15 @@ form label {
 }
 
 th { 
-  @apply w-auto text-center border border-neutral-300 dark:border-neutral-700;
+  @apply w-auto text-center border border-neutral-300 dark:border-neutral-700 px-4 py-1;
 }
 
 td { 
-  @apply w-auto text-center border border-neutral-300 dark:border-neutral-700;
+  @apply w-auto text-center border border-neutral-300 dark:border-neutral-700 px-4 py-1;
 }
 
 .filter {
-  @apply flex flex-row justify-center items-start px-4 py-1 w-full gap-3;
+  @apply flex flex-row justify-center items-start px-4 py-1 w-full gap-3 flex-wrap;
 
 }
 

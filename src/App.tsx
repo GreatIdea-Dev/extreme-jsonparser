@@ -132,8 +132,6 @@ function App() {
     ).value
       .toLowerCase()
       .trim();
-
-    console.log(filterType, filterValue);
     switch (filterType) {
       case "mac":
         filterByMac(filterValue);
@@ -156,23 +154,22 @@ function App() {
   };
 
   return (
-    <div class="flex flex-col justify-center items-center w-full h-full">
-      <div class="w-full h-auto my-4 flex justify-center items-center">
-        <h1>
-          Welcome! Please specify the correct information below to continue
-        </h1>
+    <div class="flex flex-col justify-center items-center w-screen h-full p-4 md:p-8 lg:p-16">
+      <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
+        <h1>Welcome!</h1>
+        <p>Please specify the correct information below to continue</p>
       </div>
       <div class="w-full flex flex-col justify-center items-center gap-4">
-        <form>
-          <div>
+        <form class="flex-wrap gap-4">
+          <div class="w-56">
             <label for="ipInput">Switch IP:</label>
             <input type="text" id="ipInput" placeholder="172.0.0.1" />
           </div>
-          <div>
+          <div class="w-56">
             <label for="keyInput">Key Value:</label>
             <input type="text" id="keyInput" placeholder="DP_VALUE" />
           </div>
-          <div>
+          <div class="flex-1 min-w-56">
             <label for="pathInput">API Path:</label>
             <input
               class="w-full"
@@ -202,18 +199,20 @@ function App() {
             </button>
           </div>
         </div>
-        <table class="w-full">
-          <thead>
-            <tr>
-              <th>MAC Address</th>
-              <th>VLAN</th>
-              <th>Entry Type</th>
-              <th>Interface</th>
-              <th>Subinterface</th>
-            </tr>
-          </thead>
-          <tbody>{tableData as unknown as JSX.Element}</tbody>
-        </table>
+        <div class="w-full overflow-x-scroll flex flex-row justify-center items-center">
+          <table class="w-auto">
+            <thead>
+              <tr>
+                <th>MAC Address</th>
+                <th>VLAN</th>
+                <th>Entry Type</th>
+                <th>Interface</th>
+                <th>Subinterface</th>
+              </tr>
+            </thead>
+            <tbody>{tableData as unknown as JSX.Element}</tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
