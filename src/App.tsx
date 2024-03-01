@@ -166,6 +166,7 @@ function App() {
         })
     );
   };
+
   const filterBySubinterface = (interfaceName: string) => {
     const filterEntries = entryData();
     setTableData(
@@ -188,6 +189,7 @@ function App() {
         })
     );
   };
+
   const filterByEntryType = (interfaceName: string) => {
     const filterEntries = entryData();
     setTableData(
@@ -327,6 +329,7 @@ function App() {
         );
       });
   };
+
   const handleUpdateToken = async () => {
     const user = (document.querySelector("#userInput") as HTMLInputElement)
       .value;
