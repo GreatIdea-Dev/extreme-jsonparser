@@ -159,8 +159,8 @@ function App() {
         <h1>Welcome!</h1>
         <p>Please specify the correct information below to continue</p>
       </div>
-      <div class="w-full flex flex-col justify-center items-center gap-4">
-        <form class="flex-wrap gap-4">
+      <div class="w-full flex flex-col justify-center items-start gap-4">
+        <form class="flex-wrap gap-3">
           <div class="w-56">
             <label for="ipInput">Switch IP:</label>
             <input type="text" id="ipInput" placeholder="172.0.0.1" />
@@ -172,35 +172,37 @@ function App() {
           <div class="flex-1 min-w-56">
             <label for="pathInput">API Path:</label>
             <input
-              class="w-full"
+              class="w-full max-w-[540px]"
               type="text"
               id="pathInput"
               placeholder="/api/info/about/switch/with/key"
             />
           </div>
         </form>
-        <div class="flex flex-row gap-4">
-          <div class="filter">
-            <select id="filterDropdown" class="filterInput">
-              <option value="mac">MAC Address</option>
-              <option value="vlan">VLAN</option>
-              <option value="entryType">Entry Type</option>
-              <option value="interface">Interface</option>
-              <option value="subinterface">Subinterface</option>
-            </select>
-            <input
-              class="filterInput"
-              type="text"
-              id="filterInput"
-              placeholder="Enter Value"
-            />
-            <button class="filterButton" onClick={handleFilter}>
-              Filter
-            </button>
+        <div class="flex flex-row flex-start items-center w-full">
+          <div class="flex flex-row gap-3 justify-start items-center">
+            <div class="filter">
+              <select id="filterDropdown" class="filterInput">
+                <option value="mac">MAC Address</option>
+                <option value="vlan">VLAN</option>
+                <option value="entryType">Entry Type</option>
+                <option value="interface">Interface</option>
+                <option value="subinterface">Subinterface</option>
+              </select>
+              <input
+                class="filterInput"
+                type="text"
+                id="filterInput"
+                placeholder="Enter Value"
+              />
+              <button class="filterButton" onClick={handleFilter}>
+                Filter
+              </button>
+            </div>
           </div>
         </div>
         <div class="w-full overflow-x-scroll flex flex-row justify-center items-center">
-          <table class="w-auto">
+          <table class="w-auto  min-w-full">
             <thead>
               <tr>
                 <th>MAC Address</th>
