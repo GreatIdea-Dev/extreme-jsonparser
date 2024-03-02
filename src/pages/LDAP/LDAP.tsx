@@ -80,21 +80,6 @@ export default function LDAP() {
   const [neighborsData, setNeighborsData] = createSignal();
   const [openModal, setOpenModal] = createSignal(false);
 
-  const handleFilter = () => {
-    const filterType = (
-      document.querySelector("#filterDropdown") as HTMLSelectElement
-    ).value;
-    const filterValue = (
-      document.querySelector("#filterInput") as HTMLSelectElement
-    ).value
-      .toLowerCase()
-      .trim();
-    switch (filterType) {
-      default:
-        break;
-    }
-  };
-
   const handleEntryData = () => {
     const data = JSON.parse(
       (document.querySelector("#jsonEntry") as HTMLInputElement).value
@@ -105,6 +90,8 @@ export default function LDAP() {
     const newEntries = data["openconfig-lldp:interfaces"].interface;
 
     setEntryData(newEntries);
+
+    console.log(entryData());
 
     setTableData(
       newEntries.map((entry) => {
@@ -240,7 +227,7 @@ export default function LDAP() {
           </div>
         </div>
         <div class="w-full flex flex-col justify-center items-start gap-4 py-4">
-          <div class="flex flex-row flex-start items-center w-full">
+          <div class="hidden flex-row flex-start items-center w-full">
             <div class="flex flex-row gap-3 justify-start items-center">
               <div class="filter">
                 <select id="filterDropdown" class="filterInput">
@@ -255,9 +242,7 @@ export default function LDAP() {
                   id="filterInput"
                   placeholder="Enter Value"
                 />
-                <button class="filterButton" onClick={handleFilter}>
-                  Filter
-                </button>
+                <button class="filterButton">Filter</button>
               </div>
             </div>
           </div>
