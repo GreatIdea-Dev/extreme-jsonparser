@@ -7,7 +7,7 @@ export default function Home() {
         switch APIs into a readable table output. Current endpoints supported:
       </p>
       <ul class="w-2/3 text-start list-disc list-inside py-4">
-        <li>Network Instance Info</li>
+        <li>FDB Info (Forwarding Database)</li>
         <li>LDAP Info</li>
       </ul>
     </div>

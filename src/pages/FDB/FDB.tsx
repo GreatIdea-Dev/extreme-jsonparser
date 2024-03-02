@@ -95,7 +95,7 @@ const defaultData: TableData = {
   },
 };
 
-export default function NetworkInstance() {
+export default function FDB() {
   const [tableData, setTableData] = createSignal<JSX.Element>();
   const [entryData, setEntryData] = createSignal<TableData[]>([defaultData]);
 

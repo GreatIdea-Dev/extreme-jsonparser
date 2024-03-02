@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 import LDAP from "./pages/LDAP/LDAP";
-import NetworkInstance from "./pages/NetworkInstance/NetworkInstance";
+import FDB from "./pages/FDB/FDB";
 import Home from "./pages/Home/Home";
 import FooterLogoLine from "./components/FooterLogoLine/FooterLogoLine";
 import Bell from "./assets/Bell/Bell";
@@ -28,9 +28,9 @@ export default function App() {
             <li>
               <a
                 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-500 cursor-pointer"
-                onClick={() => setPage(<NetworkInstance />)}
+                onClick={() => setPage(<FDB />)}
               >
-                Network Instance
+                FDB
               </a>
             </li>
             <li>
@@ -57,7 +57,7 @@ export default function App() {
             <a onClick={() => setPage(<Home />)}>Home</a>
           </li>
           <li>
-            <a onClick={() => setPage(<NetworkInstance />)}>Network Instance</a>
+            <a onClick={() => setPage(<FDB />)}>FDB</a>
           </li>
           <li>
             <a onClick={() => setPage(<LDAP />)}>LDAP</a>
