@@ -1,332 +1,72 @@
-import { JSX, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
+import LDAP from "./pages/LDAP/LDAP";
+import NetworkInstance from "./pages/NetworkInstance/NetworkInstance";
+import Home from "./pages/Home/Home";
+import FooterLogoLine from "./components/FooterLogoLine/FooterLogoLine";
+import Bell from "./assets/Bell/Bell";
+import Logo from "./assets/Logo/Logo";
 
-export type EntryData = {
-  "openconfig-network-instance:fdb": {
-    config: {
-      "mac-learning": boolean;
-      "maximum-entries": number;
-      "mac-aging-time": number;
-    };
-    state: {
-      "mac-learning": boolean;
-      "maximum-entries": number;
-      "mac-aging-time": number;
-    };
-    "mac-table": {
-      entries: {
-        entry: [
-          {
-            "mac-address": string;
-            config: {
-              "mac-address": string;
-              vlan: number;
-            };
-            state: {
-              "mac-address": string;
-              vlan: number;
-              "entry-type": string;
-            };
-            interface: {
-              "interface-ref": {
-                config: {
-                  interface: string;
-                  subinterface: number;
-                };
-                state: {
-                  interface: string;
-                  subinterface: number;
-                };
-              };
-            };
-          }
-        ];
-      };
-    };
-  };
-};
-
-export type TableData = {
-  "mac-address": string;
-  config: {
-    "mac-address": string;
-    vlan: number;
-  };
-  state: {
-    "mac-address": string;
-    vlan: number;
-    "entry-type": string;
-  };
-  interface: {
-    "interface-ref": {
-      config: {
-        interface: string;
-        subinterface: number;
-      };
-      state: {
-        interface: string;
-        subinterface: number;
-      };
-    };
-  };
-};
-
-const defaultData: TableData = {
-  "mac-address": "00:00:00:00:00:00",
-  config: {
-    "mac-address": "00:00:00:00:00:00",
-    vlan: 0,
-  },
-  state: {
-    "mac-address": "00:00:00:00:00:00",
-    vlan: 0,
-    "entry-type": "static",
-  },
-  interface: {
-    "interface-ref": {
-      config: {
-        interface: "eth0",
-        subinterface: 0,
-      },
-      state: {
-        interface: "eth0",
-        subinterface: 0,
-      },
-    },
-  },
-};
-
-function App() {
-  const [tableData, setTableData] = createSignal<JSX.Element>();
-  const [entryData, setEntryData] = createSignal<TableData[]>([defaultData]);
-
-  const filterByVlan = (vlan: number) => {
-    const filterEntries = entryData();
-    setTableData(
-      filterEntries
-        .filter((entry) => entry.config.vlan === vlan)
-        .map((entry) => {
-          return (
-            <tr>
-              <td>{entry["mac-address"]}</td>
-              <td>{entry.config.vlan}</td>
-              <td>{entry.state["entry-type"]}</td>
-              <td>{entry.interface["interface-ref"].config.interface}</td>
-              <td>{entry.interface["interface-ref"].config.subinterface}</td>
-            </tr>
-          ) as JSX.Element;
-        })
-    );
-  };
-
-  const filterByMac = (mac: string) => {
-    const filterEntries = entryData();
-    setTableData(
-      filterEntries
-        .filter((entry) => entry["mac-address"].includes(mac))
-        .map((entry) => {
-          return (
-            <tr>
-              <td>{entry["mac-address"]}</td>
-              <td>{entry.config.vlan}</td>
-              <td>{entry.state["entry-type"]}</td>
-              <td>{entry.interface["interface-ref"].config.interface}</td>
-              <td>{entry.interface["interface-ref"].config.subinterface}</td>
-            </tr>
-          ) as JSX.Element;
-        })
-    );
-  };
-
-  const filterByInterface = (interfaceName: string) => {
-    const filterEntries = entryData();
-    setTableData(
-      filterEntries
-        .filter((entry) =>
-          entry.interface["interface-ref"].config.interface.includes(
-            interfaceName
-          )
-        )
-        .map((entry) => {
-          return (
-            <tr>
-              <td>{entry["mac-address"]}</td>
-              <td>{entry.config.vlan}</td>
-              <td>{entry.state["entry-type"]}</td>
-              <td>{entry.interface["interface-ref"].config.interface}</td>
-              <td>{entry.interface["interface-ref"].config.subinterface}</td>
-            </tr>
-          ) as JSX.Element;
-        })
-    );
-  };
-
-  const filterBySubinterface = (interfaceName: string) => {
-    const filterEntries = entryData();
-    setTableData(
-      filterEntries
-        .filter((entry) =>
-          entry.interface["interface-ref"].config.subinterface
-            .toString()
-            .includes(interfaceName)
-        )
-        .map((entry) => {
-          return (
-            <tr>
-              <td>{entry["mac-address"]}</td>
-              <td>{entry.config.vlan}</td>
-              <td>{entry.state["entry-type"]}</td>
-              <td>{entry.interface["interface-ref"].config.interface}</td>
-              <td>{entry.interface["interface-ref"].config.subinterface}</td>
-            </tr>
-          ) as JSX.Element;
-        })
-    );
-  };
-
-  const filterByEntryType = (interfaceName: string) => {
-    const filterEntries = entryData();
-    setTableData(
-      filterEntries
-        .filter((entry) =>
-          entry.state["entry-type"]
-            .toLowerCase()
-            .includes(interfaceName.toLowerCase())
-        )
-        .map((entry) => {
-          return (
-            <tr>
-              <td>{entry["mac-address"]}</td>
-              <td>{entry.config.vlan}</td>
-              <td>{entry.state["entry-type"]}</td>
-              <td>{entry.interface["interface-ref"].config.interface}</td>
-              <td>{entry.interface["interface-ref"].config.subinterface}</td>
-            </tr>
-          ) as JSX.Element;
-        })
-    );
-  };
-
-  const handleFilter = () => {
-    const filterType = (
-      document.querySelector("#filterDropdown") as HTMLSelectElement
-    ).value;
-    const filterValue = (
-      document.querySelector("#filterInput") as HTMLSelectElement
-    ).value
-      .toLowerCase()
-      .trim();
-    switch (filterType) {
-      case "mac":
-        filterByMac(filterValue);
-        break;
-      case "vlan":
-        filterByVlan(parseInt(filterValue));
-        break;
-      case "interface":
-        filterByInterface(filterValue);
-        break;
-      case "entryType":
-        filterByEntryType(filterValue);
-        break;
-      case "subinterface":
-        filterBySubinterface(filterValue);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleEntryData = () => {
-    const data = JSON.parse(
-      (document.querySelector("#jsonEntry") as HTMLInputElement).value
-    ) as EntryData;
-
-    const newEntries = data[
-      "openconfig-network-instance:fdb" as keyof EntryData
-    ]["mac-table"].entries.entry as TableData[];
-
-    setEntryData(newEntries);
-
-    setTableData(
-      newEntries.map((entry) => {
-        return (
-          <tr>
-            <td>{entry["mac-address"]}</td>
-            <td>{entry.config.vlan}</td>
-            <td>{entry.state["entry-type"]}</td>
-            <td>{entry.interface["interface-ref"].config.interface}</td>
-            <td>{entry.interface["interface-ref"].config.subinterface}</td>
-          </tr>
-        ) as JSX.Element;
-      })
-    );
-  };
+export default function App() {
+  const [page, setPage] = createSignal(<Home />);
 
   return (
-    <div class="flex flex-col justify-center items-center w-screen h-full p-4 md:p-8 lg:p-16">
-      <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
-        <h1>Instance API JSON Parser</h1>
-        <p class="text-xl">Paste Data as JSON from Postman to update table.</p>
-      </div>
-      <div class="flex flex-row justify-center items-center w-full">
-        <div class="flex w-full justify-start items-center flex-col">
-          <div class="apiForm">
-            <div class="flex flex-col justify-center items-start gap-2 w-full">
-              <textarea
-                class="apiFormInput"
-                id="jsonEntry"
-                placeholder={"Paste JSON Here"}
-              />
-            </div>
-          </div>
-          <div class="w-full flex flex-row justify-start items-center gap-3">
-            <div class="w-full my-4 flex flex-row justify-start items-center">
-              <button class="apiButton" onClick={handleEntryData}>
-                Update Table Data
-              </button>
-            </div>
-          </div>
+    <div class="min-h-screen w-screen flex flex-col justify-between items-center">
+      <header class="w-full h-16 border-b border-neutral-300 dark:border-neutral-700 flex justify-center items-center px-8">
+        <div class="w-24 h-full flex justify-center items-center ">
+          <Logo />
         </div>
-      </div>
-      <div class="w-full flex flex-col justify-center items-start gap-4 py-4">
-        <div class="flex flex-row flex-start items-center w-full">
-          <div class="flex flex-row gap-3 justify-start items-center">
-            <div class="filter">
-              <select id="filterDropdown" class="filterInput">
-                <option value="mac">MAC Address</option>
-                <option value="vlan">VLAN</option>
-                <option value="entryType">Entry Type</option>
-                <option value="interface">Interface</option>
-                <option value="subinterface">Subinterface</option>
-              </select>
-              <textarea
-                class="filterInput"
-                id="filterInput"
-                placeholder="Enter Value"
-              />
-              <button class="filterButton" onClick={handleFilter}>
-                Filter
-              </button>
-            </div>
-          </div>
+        <nav class="w-full h-full flex flex-row justify-between items-center">
+          <ul class="flex flex-row justify-center items-center gap-8 flex-1">
+            <li class="flex">
+              <a
+                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-400 cursor-pointer"
+                onClick={() => setPage(<Home />)}
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-400 cursor-pointer"
+                onClick={() => setPage(<NetworkInstance />)}
+              >
+                Network Instance
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-400 cursor-pointer"
+                onClick={() => setPage(<LDAP />)}
+              >
+                LDAP
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="w-24 h-full flex justify-end items-center">
+          <Bell />
         </div>
-        <div class="w-full overflow-x-scroll flex flex-row justify-center items-center">
-          <table class="w-auto  min-w-full">
-            <thead>
-              <tr>
-                <th>MAC Address</th>
-                <th>VLAN</th>
-                <th>Entry Type</th>
-                <th>Interface</th>
-                <th>Subinterface</th>
-              </tr>
-            </thead>
-            <tbody>{tableData as unknown as JSX.Element}</tbody>
-          </table>
-        </div>
-      </div>
+      </header>
+      <main class="flex-1 w-full h-auto p-4 flex flex-col justify-start items-center">
+        {page()}
+      </main>
+      <FooterLogoLine />
+      <footer class="mx-auto flex-col gap-3.5 px-4 max-w-7xl py-9 flex">
+        <ul class="footerNav">
+          <li>
+            <a onClick={() => setPage(<Home />)}>Home</a>
+          </li>
+          <li>
+            <a onClick={() => setPage(<NetworkInstance />)}>Network Instance</a>
+          </li>
+          <li>
+            <a onClick={() => setPage(<LDAP />)}>LDAP</a>
+          </li>
+        </ul>
+        <a href="mailto:john@jjlarson.com" class="copy">
+          &copy; 2024 Great Idea Development | All Rights Reserved
+        </a>
+      </footer>
     </div>
   );
 }
-
-export default App;
