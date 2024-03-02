@@ -197,7 +197,7 @@ export default function LDAP() {
         class={
           openModal()
             ? `hidden`
-            : `flex flex-col justify-start items-center w-screen h-screen px-4 sm:px-8 md:px-16`
+            : `flex flex-col justify-start items-center w-screen h-full px-4 sm:px-8 md:px-16`
         }
       >
         <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
