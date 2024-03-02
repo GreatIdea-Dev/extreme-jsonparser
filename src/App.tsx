@@ -19,7 +19,7 @@ export default function App() {
           <ul class="flex flex-row justify-center items-center gap-8 flex-1">
             <li class="flex">
               <a
-                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-400 cursor-pointer"
+                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-500 cursor-pointer"
                 onClick={() => setPage(<Home />)}
               >
                 Home
@@ -27,7 +27,7 @@ export default function App() {
             </li>
             <li>
               <a
-                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-400 cursor-pointer"
+                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-500 cursor-pointer"
                 onClick={() => setPage(<NetworkInstance />)}
               >
                 Network Instance
@@ -35,7 +35,7 @@ export default function App() {
             </li>
             <li>
               <a
-                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-400 cursor-pointer"
+                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-500 cursor-pointer"
                 onClick={() => setPage(<LDAP />)}
               >
                 LDAP
@@ -47,7 +47,7 @@ export default function App() {
           <Bell />
         </div>
       </header>
-      <main class="flex-1 w-full h-auto p-4 flex flex-col justify-start items-center">
+      <main class="flex-1 w-full h-auto p-4 flex flex-col justify-start items-center pb-8">
         {page()}
       </main>
       <FooterLogoLine />
