@@ -72,3 +72,24 @@ td {
   @apply border border-neutral-300 dark:border-neutral-700;
   @apply px-4 py-2 rounded-md;
 }
+
+.footerNav {
+    @apply flex flex-row items-center justify-center;
+    @apply gap-4;
+}
+
+.footerNav li {
+    @apply flex;
+}
+
+.footerNav a {
+    @apply text-sm font-medium cursor-pointer;
+    @apply text-neutral-700 dark:text-neutral-400 hover:text-purple-400;
+}
+
+.copy {
+  @apply dark:text-neutral-700 text-neutral-400;
+    @apply text-sm text-center;
+    @apply flex items-center justify-center;
+    @apply w-full h-full;
+}
