@@ -41,7 +41,7 @@ td {
 }
 
 .apiButton {
-  @apply bg-purple-600 hover:bg-purple-800;
+  @apply bg-purple-500 hover:bg-purple-700;
   @apply w-full h-11;
   @apply font-medium text-neutral-200;
   @apply placeholder-neutral-400 dark:placeholder-neutral-600;
@@ -65,7 +65,7 @@ td {
 }
 
 .filterButton {
-  @apply bg-purple-600 hover:bg-purple-800;
+  @apply bg-purple-500 hover:bg-purple-700;
   @apply w-36 h-11;
   @apply font-medium text-neutral-200;
   @apply placeholder-neutral-400 dark:placeholder-neutral-600;
@@ -84,7 +84,7 @@ td {
 
 .footerNav a {
     @apply text-sm font-medium cursor-pointer;
-    @apply text-neutral-700 dark:text-neutral-400 hover:text-purple-400;
+    @apply text-neutral-700 dark:text-neutral-400 hover:text-purple-500;
 }
 
 .copy {
