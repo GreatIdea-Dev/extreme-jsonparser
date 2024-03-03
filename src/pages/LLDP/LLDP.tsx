@@ -179,7 +179,6 @@ export default function LLDP() {
             <td>{neighbor.state["port-id"]}</td>
             <td>{neighbor.state["chassis-id-type"]}</td>
             <td>{neighbor.state["port-description"]}</td>
-            <td>{neighbor.state.id}</td>
           </tr>
         ) as JSX.Element;
       })
@@ -220,7 +219,6 @@ export default function LLDP() {
                     <th class="px-16">Neighbor Port</th>
                     <th>Chassis ID Type</th>
                     <th>Port Description</th>
-                    <th>ID</th>
                   </tr>
                 </thead>
                 <tbody>{neighborsData as unknown as JSX.Element}</tbody>
