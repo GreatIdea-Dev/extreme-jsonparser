@@ -76,22 +76,52 @@ export type TableData = {
 
 export default function LDAP() {
   const [tableData, setTableData] = createSignal<JSX.Element>();
-  const [entryData, setEntryData] = createSignal<TableData[]>([]);
+  const [entryData, setEntryData] = createSignal<TableData[]>(
+    JSON.parse(localStorage.getItem("ldapEntries") as string) as TableData[]
+  );
   const [neighborsData, setNeighborsData] = createSignal();
   const [openModal, setOpenModal] = createSignal(false);
+
+  const setDefaultTableData = () => {
+    setTableData(
+      entryData().map((entry) => {
+        return (
+          <tr>
+            <td>{entry.name}</td>
+            <td>{entry.config?.name}</td>
+            <td>{entry.config?.enabled ? "true" : "false"}</td>
+            <td>{entry.state?.name}</td>
+            <td>{entry.state?.enabled ? "true" : "false"}</td>
+            <td
+              onClick={() =>
+                entry.neighbors && handleModalData(entry.neighbors.neighbor)
+              }
+              class={
+                entry.neighbors
+                  ? `cursor-pointer text-purple-500 italic hover:underline`
+                  : `text-gray-500 italic`
+              }
+            >
+              {entry.neighbors ? "View Neighbors" : "No Neighbors"}
+            </td>
+          </tr>
+        ) as JSX.Element;
+      })
+    );
+  };
+
+  setDefaultTableData();
 
   const handleEntryData = () => {
     const data = JSON.parse(
       (document.querySelector("#jsonEntry") as HTMLInputElement).value
     ) as EntryData;
 
-    console.log(data);
-
     const newEntries = data["openconfig-lldp:interfaces"].interface;
 
     setEntryData(newEntries);
 
-    console.log(entryData());
+    localStorage.setItem("ldapEntries", JSON.stringify(newEntries));
 
     setTableData(
       newEntries.map((entry) => {
@@ -121,7 +151,6 @@ export default function LDAP() {
   };
 
   const handleModalData = (neighbors: NeighborType[]) => {
-    console.log(neighbors);
     setNeighborsData(
       neighbors.map((neighbor) => {
         return (
