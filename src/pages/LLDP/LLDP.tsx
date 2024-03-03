@@ -213,7 +213,7 @@ export default function LLDP() {
                     <th>Neighbor Chassis ID</th>
                     <th class="px-32">System Name</th>
                     <th class="px-32">System Description</th>
-                    <th>Age</th>
+                    <th class="px-16">Current TTL Age</th>
                     <th>Management Address</th>
                     <th>Neighbor Port Type</th>
                     <th class="px-16">Neighbor Port</th>
