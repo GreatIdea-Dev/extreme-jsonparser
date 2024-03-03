@@ -70,34 +70,28 @@ export type TableData = {
   };
 };
 
-const defaultData: TableData = {
-  "mac-address": "00:00:00:00:00:00",
-  config: {
-    "mac-address": "00:00:00:00:00:00",
-    vlan: 0,
-  },
-  state: {
-    "mac-address": "00:00:00:00:00:00",
-    vlan: 0,
-    "entry-type": "static",
-  },
-  interface: {
-    "interface-ref": {
-      config: {
-        interface: "eth0",
-        subinterface: 0,
-      },
-      state: {
-        interface: "eth0",
-        subinterface: 0,
-      },
-    },
-  },
-};
-
 export default function FDB() {
   const [tableData, setTableData] = createSignal<JSX.Element>();
-  const [entryData, setEntryData] = createSignal<TableData[]>([defaultData]);
+  const [entryData, setEntryData] = createSignal<TableData[]>(
+    JSON.parse(localStorage.getItem("fdbEntries") as string) as TableData[]
+  );
+
+  const setDefaultTableData = () => {
+    setTableData(
+      entryData().map((entry) => {
+        return (
+          <tr>
+            <td>{entry["mac-address"]}</td>
+            <td>{entry.config.vlan}</td>
+            <td>{entry.state["entry-type"]}</td>
+            <td>{entry.interface["interface-ref"].config.interface}</td>
+            <td>{entry.interface["interface-ref"].config.subinterface}</td>
+          </tr>
+        ) as JSX.Element;
+      })
+    );
+  };
+  setDefaultTableData();
 
   const filterByVlan = (vlan: number) => {
     const filterEntries = entryData();
@@ -246,6 +240,8 @@ export default function FDB() {
     ]["mac-table"].entries.entry as TableData[];
 
     setEntryData(newEntries);
+
+    localStorage.setItem("fdbEntries", JSON.stringify(newEntries));
 
     setTableData(
       newEntries.map((entry) => {
