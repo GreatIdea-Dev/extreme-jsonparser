@@ -265,7 +265,7 @@ export default function FDB() {
   return (
     <div class="flex flex-col justify-start items-center w-screen h-full px-4 sm:px-8 md:px-16">
       <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
-        <h1>Netwwork Instance API JSON Parser</h1>
+        <h1>Forwarding Database API JSON Parser</h1>
         <p class="text-xl">Paste Data as JSON from Postman to update table.</p>
       </div>
       <div class="flex flex-row justify-center items-center w-full">

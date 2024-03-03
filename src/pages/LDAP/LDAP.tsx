@@ -201,7 +201,7 @@ export default function LDAP() {
         }
       >
         <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
-          <h1>Netwwork Instance API JSON Parser</h1>
+          <h1>LDAP API JSON Parser</h1>
           <p class="text-xl">
             Paste Data as JSON from Postman to update table.
           </p>
