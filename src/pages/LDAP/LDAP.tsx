@@ -83,6 +83,7 @@ export default function LDAP() {
   const [openModal, setOpenModal] = createSignal(false);
 
   const setDefaultTableData = () => {
+    if (!entryData()) return;
     setTableData(
       entryData().map((entry) => {
         return (
