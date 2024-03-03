@@ -264,6 +264,9 @@ export default function FDB() {
       <div class="w-full h-auto my-4 flex flex-col justify-center items-center">
         <h1>Forwarding Database API JSON Parser</h1>
         <p class="text-xl">Paste Data as JSON from Postman to update table.</p>
+        <p class="text-sm italic text-neutral-400 dark:text-neutral-700">
+          http://&lt;IPADDRESS&gt;/rest/restconf/data/openconfig-network-instance:network-instances/network-instance=VR-Default/fdb?formatted=true
+        </p>
       </div>
       <div class="flex flex-row justify-center items-center w-full">
         <div class="flex w-full justify-start items-center flex-col">

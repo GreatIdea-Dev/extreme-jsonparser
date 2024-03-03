@@ -77,7 +77,7 @@ export type TableData = {
 export default function LLDP() {
   const [tableData, setTableData] = createSignal<JSX.Element>();
   const [entryData, setEntryData] = createSignal<TableData[]>(
-    JSON.parse(localStorage.getItem("ldapEntries") as string) as TableData[]
+    JSON.parse(localStorage.getItem("lldpEntries") as string) as TableData[]
   );
   const [neighborsData, setNeighborsData] = createSignal();
   const [openModal, setOpenModal] = createSignal(false);
@@ -129,7 +129,7 @@ export default function LLDP() {
 
     setEntryData(newEntries);
 
-    localStorage.setItem("ldapEntries", JSON.stringify(newEntries));
+    localStorage.setItem("lldpEntries", JSON.stringify(newEntries));
 
     setTableData(
       newEntries.map((entry) => {
@@ -244,6 +244,9 @@ export default function LLDP() {
           <h1>LLDP API JSON Parser</h1>
           <p class="text-xl">
             Paste Data as JSON from Postman to update table.
+          </p>
+          <p class="text-sm italic text-neutral-400 dark:text-neutral-700">
+            http://&lt;IPADDRESS&gt;/rest/restconf/data/openconfig-lldp:lldp/interfaces
           </p>
         </div>
         <div class="flex flex-row justify-center items-center w-full">

@@ -9,7 +9,7 @@ export default function Home() {
         </p>
         <ul class="w-2/3 text-start list-disc list-inside py-4">
           <li>FDB Info (Forwarding Database)</li>
-          <li>LDAP Info</li>
+          <li>LLDP Info</li>
         </ul>
       </div>
     </div>
