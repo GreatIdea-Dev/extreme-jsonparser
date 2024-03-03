@@ -77,6 +77,7 @@ export default function FDB() {
   );
 
   const setDefaultTableData = () => {
+    if (!entryData()) return;
     setTableData(
       entryData().map((entry) => {
         return (
