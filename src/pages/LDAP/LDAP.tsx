@@ -90,9 +90,16 @@ export default function LDAP() {
           <tr>
             <td>{entry.name}</td>
             <td>{entry.config?.name}</td>
-            <td>{entry.config?.enabled ? "true" : "false"}</td>
-            <td>{entry.state?.name}</td>
-            <td>{entry.state?.enabled ? "true" : "false"}</td>
+            <td
+              class={entry.config?.enabled ? `text-green-500` : `text-red-500`}
+            >
+              {entry.config?.enabled ? "true" : "false"}
+            </td>
+            <td
+              class={entry.state?.enabled ? `text-green-500` : `text-red-500`}
+            >
+              {entry.state?.enabled ? "true" : "false"}
+            </td>
             <td
               onClick={() =>
                 entry.neighbors && handleModalData(entry.neighbors.neighbor)
@@ -130,9 +137,16 @@ export default function LDAP() {
           <tr>
             <td>{entry.name}</td>
             <td>{entry.config?.name}</td>
-            <td>{entry.config?.enabled ? "true" : "false"}</td>
-            <td>{entry.state?.name}</td>
-            <td>{entry.state?.enabled ? "true" : "false"}</td>
+            <td
+              class={entry.config?.enabled ? `text-green-500` : `text-red-500`}
+            >
+              {entry.config?.enabled ? "true" : "false"}
+            </td>
+            <td
+              class={entry.state?.enabled ? `text-green-500` : `text-red-500`}
+            >
+              {entry.state?.enabled ? "true" : "false"}
+            </td>
             <td
               onClick={() =>
                 entry.neighbors && handleModalData(entry.neighbors.neighbor)
@@ -157,16 +171,15 @@ export default function LDAP() {
         return (
           <tr>
             <td>{neighbor.state["chassis-id"]}</td>
+            <td>{neighbor.state["system-name"]}</td>
             <td>{neighbor.state["system-description"]}</td>
             <td>{neighbor.state.age}</td>
             <td>{neighbor.state["management-address"]}</td>
             <td>{neighbor.state["port-id-type"]}</td>
             <td>{neighbor.state["port-id"]}</td>
             <td>{neighbor.state["chassis-id-type"]}</td>
-            <td>{neighbor.state["last-update"]}</td>
             <td>{neighbor.state["port-description"]}</td>
             <td>{neighbor.state.id}</td>
-            <td>{neighbor.state["system-name"]}</td>
           </tr>
         ) as JSX.Element;
       })
@@ -198,17 +211,16 @@ export default function LDAP() {
               <table class="w-auto h-auto">
                 <thead>
                   <tr>
-                    <th>Chassis ID</th>
+                    <th>Neighbor Chassis ID</th>
+                    <th class="px-32">System Name</th>
                     <th class="px-32">System Description</th>
                     <th>Age</th>
                     <th>Management Address</th>
-                    <th>Port ID Type</th>
-                    <th>Port ID</th>
+                    <th>Neighbor Port Type</th>
+                    <th class="px-16">Neighbor Port</th>
                     <th>Chassis ID Type</th>
-                    <th>Last Update</th>
                     <th>Port Description</th>
                     <th>ID</th>
-                    <th>System Name</th>
                   </tr>
                 </thead>
                 <tbody>{neighborsData as unknown as JSX.Element}</tbody>
@@ -264,7 +276,6 @@ export default function LDAP() {
                   <option value="mac">Name</option>
                   <option value="vlan">Config Name</option>
                   <option value="entryType">Config Enabled?</option>
-                  <option value="interface">State Name</option>
                   <option value="subinterface">State Enabled?</option>
                 </select>
                 <textarea
@@ -280,11 +291,10 @@ export default function LDAP() {
             <table class="w-auto  min-w-full">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Switch Port</th>
                   <th>Config Name</th>
                   <th>Config Enabled?</th>
-                  <th>State Name</th>
-                  <th>State Enabled?</th>
+                  <th>LLDP Enabled?</th>
                   <th>Neighbors</th>
                 </tr>
               </thead>
