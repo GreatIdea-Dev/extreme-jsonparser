@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import LDAP from "./pages/LDAP/LDAP";
+import LLDP from "./pages/LLDP/LLDP";
 import FDB from "./pages/FDB/FDB";
 import Home from "./pages/Home/Home";
 import FooterLogoLine from "./components/FooterLogoLine/FooterLogoLine";
@@ -36,9 +36,9 @@ export default function App() {
             <li>
               <a
                 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-500 cursor-pointer"
-                onClick={() => setPage(<LDAP />)}
+                onClick={() => setPage(<LLDP />)}
               >
-                LDAP
+                LLDP
               </a>
             </li>
           </ul>
@@ -60,7 +60,7 @@ export default function App() {
             <a onClick={() => setPage(<FDB />)}>FDB</a>
           </li>
           <li>
-            <a onClick={() => setPage(<LDAP />)}>LDAP</a>
+            <a onClick={() => setPage(<LLDP />)}>LLDP</a>
           </li>
         </ul>
         <a href="mailto:john@jjlarson.com" class="copy">
