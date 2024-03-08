@@ -93,3 +93,11 @@ td {
     @apply flex items-center justify-center;
     @apply w-full h-full;
 }
+
+th {
+  @apply whitespace-nowrap;
+}
+
+td {
+  @apply whitespace-nowrap;
+}

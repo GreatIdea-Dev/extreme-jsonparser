@@ -41,6 +41,15 @@ export default function App() {
                 LLDP
               </a>
             </li>
+            <li>
+              <a
+                class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-purple-500 cursor-pointer"
+                href="https://greatidea.dev/"
+                target="_blank"
+              >
+                Contact
+              </a>
+            </li>
           </ul>
         </nav>
         <div class="w-24 h-full flex justify-end items-center">
@@ -63,7 +72,7 @@ export default function App() {
             <a onClick={() => setPage(<LLDP />)}>LLDP</a>
           </li>
         </ul>
-        <a href="mailto:john@jjlarson.com" class="copy">
+        <a href="https://greatidea.dev/" target="_blank" class="copy">
           &copy; 2024 Great Idea Development | All Rights Reserved
         </a>
       </footer>
