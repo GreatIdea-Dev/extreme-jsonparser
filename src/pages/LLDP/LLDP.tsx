@@ -1,4 +1,5 @@
 import { JSX, createSignal } from "solid-js";
+import macData from "../../data/mac-vendors-export.json";
 
 export type EntryData = {
   "openconfig-lldp:interfaces": {
@@ -118,21 +119,14 @@ export default function LLDP() {
   const [neighborsData, setNeighborsData] = createSignal();
   const [openModal, setOpenModal] = createSignal(false);
 
-  //01hrej2xmhkzt2ppqm2wz749kq01hrej3q4c28g58h4pym5fca962xwq0iuyjagk
+  // search for vendor name based on given mac address from /src/data/mac-vendors-export.json
+  const lookupMAC = (mac: string): string | undefined => {
+    const ouiData = macData as unknown as ouiData[];
+    const macPrefix = mac.split(":").slice(0, 3).join(":").toUpperCase();
 
-  const lookupMAC = async (mac: string) => {
-    const macPrefix = mac.split(":").join("");
-    await fetch(`https://api.maclookup.app/v2/macs/${macPrefix}/company/name`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        apiKey:
-          "01hrej2xmhkzt2ppqm2wz749kq01hrej3q4c28g58h4pym5fca962xwq0iuyjagk",
-      },
-    }).then((response) => {
-      console.log(response);
-      return response.json();
-    });
+    const vendor = ouiData.find((data) => data.macPrefix === macPrefix);
+
+    return vendor?.vendorName;
   };
 
   const setDefaultTableData = () => {
@@ -231,7 +225,9 @@ export default function LLDP() {
             <td>{neighbor.state["port-id-type"]}</td>
             <td>{neighbor.state["port-id"]}</td>
             <td>{neighbor.state["chassis-id-type"]}</td>
-            <td>{neighbor.state["port-description"]}</td>
+            <td class="whitespace-nowrap">
+              {neighbor.state["port-description"]}
+            </td>
             <td
               class={
                 neighbor["custom-tlvs"] ? `text-xs` : `text-gray-500 italic`
@@ -245,35 +241,33 @@ export default function LLDP() {
                       <p>{tlv.oui}</p>
                       <p>{tlv["oui-subtype"]}</p>
                       <p>{tlv.type}</p>
-                      <p>{vendor as unknown as string}</p>
+                      <p class="whitespace-nowrap">
+                        {vendor ?? tlv.state.value}
+                      </p>
                     </div>
                   ) as JSX.Element;
                 })}
               </div>
             </td>
-            <td
-              class={
-                neighbor.capabilities
-                  ? `cursor-pointer text-purple-500 italic hover:underline`
-                  : `text-gray-500 italic`
-              }
-            >
+            <td class={neighbor.capabilities ? `` : `text-gray-500 italic`}>
               <div class="flex flex-col gap-1">
-                {neighbor.capabilities?.capability.map((capability) => {
-                  return (
-                    <div class="flex flex-row justify-between items-center">
-                      <p
-                        class={
-                          capability.state.enabled
-                            ? "text-green-500"
-                            : "text-red-500"
-                        }
-                      >
-                        {capability.state.name}
-                      </p>
-                    </div>
-                  ) as JSX.Element;
-                })}
+                {neighbor.capabilities
+                  ? neighbor.capabilities.capability.map((capability) => {
+                      return (
+                        <div class="flex flex-row justify-between items-center">
+                          <p
+                            class={
+                              capability.state.enabled
+                                ? "text-green-500"
+                                : "text-red-500"
+                            }
+                          >
+                            {capability.state.name}
+                          </p>
+                        </div>
+                      ) as JSX.Element;
+                    })
+                  : "No Capabilities"}
               </div>
             </td>
           </tr>
@@ -308,12 +302,12 @@ export default function LLDP() {
                 <thead>
                   <tr>
                     <th>Neighbor Chassis ID</th>
-                    <th class="px-32">System Name</th>
-                    <th class="px-32">System Description</th>
-                    <th class="px-16">Current TTL Age</th>
+                    <th>System Name</th>
+                    <th>System Description</th>
+                    <th>Current TTL Age</th>
                     <th>Management Address</th>
                     <th>Neighbor Port Type</th>
-                    <th class="px-16">Neighbor Port</th>
+                    <th>Neighbor Port</th>
                     <th>Chassis ID Type</th>
                     <th>Port Description</th>
                     <th>Custom TLVS</th>
