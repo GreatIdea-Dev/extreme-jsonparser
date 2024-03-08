@@ -124,7 +124,7 @@ export default function LLDP() {
     const macPrefix = mac.split(":").join("");
     await fetch(`https://api.maclookup.app/v2/macs/${macPrefix}/company/name`, {
       method: "GET",
-      mode: "cors",
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
         apiKey:
