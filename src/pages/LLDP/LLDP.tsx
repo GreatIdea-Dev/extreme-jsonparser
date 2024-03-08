@@ -218,6 +218,9 @@ export default function LLDP() {
         return (
           <tr>
             <td>{neighbor.state["chassis-id"]}</td>
+            <td>
+              {lookupMAC(neighbor.state["chassis-id"] ?? "Unknown Vendor")}
+            </td>
             <td>{neighbor.state["system-name"]}</td>
             <td>{neighbor.state["system-description"]}</td>
             <td>{neighbor.state.age}</td>
@@ -227,27 +230,6 @@ export default function LLDP() {
             <td>{neighbor.state["chassis-id-type"]}</td>
             <td class="whitespace-nowrap">
               {neighbor.state["port-description"]}
-            </td>
-            <td
-              class={
-                neighbor["custom-tlvs"] ? `text-xs` : `text-gray-500 italic`
-              }
-            >
-              <div class="flex flex-col gap-1">
-                {neighbor["custom-tlvs"]?.tlv.map((tlv) => {
-                  const vendor = lookupMAC(tlv.state.value);
-                  return (
-                    <div class="flex flex-row gap-2 justify-start items-center">
-                      <p>{tlv.oui}</p>
-                      <p>{tlv["oui-subtype"]}</p>
-                      <p>{tlv.type}</p>
-                      <p class="whitespace-nowrap">
-                        {vendor ?? tlv.state.value}
-                      </p>
-                    </div>
-                  ) as JSX.Element;
-                })}
-              </div>
             </td>
             <td class={neighbor.capabilities ? `` : `text-gray-500 italic`}>
               <div class="flex flex-col gap-1">
@@ -302,6 +284,7 @@ export default function LLDP() {
                 <thead>
                   <tr>
                     <th>Neighbor Chassis ID</th>
+                    <th>Neighbor Vendor</th>
                     <th>System Name</th>
                     <th>System Description</th>
                     <th>Current TTL Age</th>
@@ -310,7 +293,6 @@ export default function LLDP() {
                     <th>Neighbor Port</th>
                     <th>Chassis ID Type</th>
                     <th>Port Description</th>
-                    <th>Custom TLVS</th>
                     <th>Capabilities</th>
                   </tr>
                 </thead>
