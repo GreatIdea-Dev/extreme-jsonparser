@@ -233,24 +233,26 @@ export default function LLDP() {
                 neighbor["custom-tlvs"] ? `text-xs` : `text-gray-500 italic`
               }
             >
-              <div class="flex flex-col gap-1">
-                {neighbor["custom-tlvs"]?.tlv.map((tlv) => {
-                  const vendor = lookupMAC(tlv.state.value);
-                  return (
-                    <div class="flex flex-row gap-2 justify-start items-center">
-                      <p>{tlv.oui}</p>
-                      <p>{tlv["oui-subtype"]}</p>
-                      <p>{tlv.type}</p>
-                      <p class="whitespace-nowrap">
-                        {vendor ?? tlv.state.value}
-                      </p>
-                    </div>
-                  ) as JSX.Element;
-                })}
+              <div class="flex flex-col gap-1 p-4">
+                {neighbor["custom-tlvs"]
+                  ? neighbor["custom-tlvs"]?.tlv.map((tlv) => {
+                      const vendor = lookupMAC(tlv.state.value);
+                      return (
+                        <div class="flex flex-row gap-2 justify-start items-center">
+                          <p>{tlv.oui}</p>
+                          <p>{tlv.type}</p>
+                          <p>{tlv["oui-subtype"]}</p>
+                          <p class="whitespace-nowrap">
+                            {vendor ?? tlv.state.value}
+                          </p>
+                        </div>
+                      ) as JSX.Element;
+                    })
+                  : "No Custom TLVS"}
               </div>
             </td>
             <td class={neighbor.capabilities ? `` : `text-gray-500 italic`}>
-              <div class="flex flex-col gap-1">
+              <div class="flex flex-col gap-1 p-4">
                 {neighbor.capabilities
                   ? neighbor.capabilities.capability.map((capability) => {
                       return (
@@ -289,7 +291,13 @@ export default function LLDP() {
         <div class="modal-container bg-neutral-200 dark:bg-neutral-900 w-screen h-screen overflow-x-scroll overflow-y-scroll rounded shadow-lg p-16">
           <div class="modal-content text-left p-6 flex flex-col justify-start items-center overflow-hidden">
             <div class="flex justify-between items-center pb-3 w-full">
-              <p class="text-2xl font-bold">Neighbor Data</p>
+              <div class="flex flex-col justify-center items-start">
+                <p class="text-2xl font-bold">Neighbor Data</p>
+                <p class="text-sm italic text-neutral-400 dark:text-neutral-700">
+                  Custom TLVS displays oui, type, subtype and vendor. If no
+                  vendor is present, the oui value is displayed instead.
+                </p>
+              </div>
               <div class="flex justify-end w-56">
                 <button class="apiButton" onClick={() => setOpenModal(false)}>
                   Close
