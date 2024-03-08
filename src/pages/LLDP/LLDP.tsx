@@ -31,7 +31,35 @@ export type NeighborType = {
     "system-name": string;
   };
 
+  "custom-tlvs": {
+    tlv: TlvType[];
+  };
+
+  capabilities: {
+    capability: CapabilityType[];
+  };
+
   id: string;
+};
+
+export type TlvType = {
+  oui: string;
+  "oui-subtype": string;
+  type: string;
+  state: {
+    oui: string;
+    "oui-subtype": string;
+    type: number;
+    value: string;
+  };
+};
+
+export type CapabilityType = {
+  state: {
+    enabled: boolean;
+    name: string;
+  };
+  name: string;
 };
 
 export type CountersType = {
@@ -74,6 +102,14 @@ export type TableData = {
   name?: string;
 };
 
+export type ouiData = {
+  macPrefix: string;
+  vendorName: string;
+  private: false;
+  blockType: string;
+  lastUpdate: string;
+};
+
 export default function LLDP() {
   const [tableData, setTableData] = createSignal<JSX.Element>();
   const [entryData, setEntryData] = createSignal<TableData[]>(
@@ -81,6 +117,24 @@ export default function LLDP() {
   );
   const [neighborsData, setNeighborsData] = createSignal();
   const [openModal, setOpenModal] = createSignal(false);
+
+  //01hrej2xmhkzt2ppqm2wz749kq01hrej3q4c28g58h4pym5fca962xwq0iuyjagk
+
+  const lookupMAC = async (mac: string) => {
+    const macPrefix = mac.split(":").join("");
+    await fetch(`http://api.maclookup.app/v2/macs/${macPrefix}/company/name`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        apiKey:
+          "01hrej2xmhkzt2ppqm2wz749kq01hrej3q4c28g58h4pym5fca962xwq0iuyjagk",
+      },
+    }).then((response) => {
+      console.log(response);
+      return response.json();
+    });
+  };
 
   const setDefaultTableData = () => {
     if (!entryData()) return;
@@ -179,6 +233,50 @@ export default function LLDP() {
             <td>{neighbor.state["port-id"]}</td>
             <td>{neighbor.state["chassis-id-type"]}</td>
             <td>{neighbor.state["port-description"]}</td>
+            <td
+              class={
+                neighbor["custom-tlvs"] ? `text-xs` : `text-gray-500 italic`
+              }
+            >
+              <div class="flex flex-col gap-1">
+                {neighbor["custom-tlvs"]?.tlv.map((tlv) => {
+                  const vendor = lookupMAC(tlv.state.value);
+                  return (
+                    <div class="flex flex-row gap-2 justify-start items-center">
+                      <p>{tlv.oui}</p>
+                      <p>{tlv["oui-subtype"]}</p>
+                      <p>{tlv.type}</p>
+                      <p>{vendor as unknown as string}</p>
+                    </div>
+                  ) as JSX.Element;
+                })}
+              </div>
+            </td>
+            <td
+              class={
+                neighbor.capabilities
+                  ? `cursor-pointer text-purple-500 italic hover:underline`
+                  : `text-gray-500 italic`
+              }
+            >
+              <div class="flex flex-col gap-1">
+                {neighbor.capabilities?.capability.map((capability) => {
+                  return (
+                    <div class="flex flex-row justify-between items-center">
+                      <p
+                        class={
+                          capability.state.enabled
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }
+                      >
+                        {capability.state.name}
+                      </p>
+                    </div>
+                  ) as JSX.Element;
+                })}
+              </div>
+            </td>
           </tr>
         ) as JSX.Element;
       })
@@ -219,6 +317,8 @@ export default function LLDP() {
                     <th class="px-16">Neighbor Port</th>
                     <th>Chassis ID Type</th>
                     <th>Port Description</th>
+                    <th>Custom TLVS</th>
+                    <th>Capabilities</th>
                   </tr>
                 </thead>
                 <tbody>{neighborsData as unknown as JSX.Element}</tbody>
@@ -289,7 +389,7 @@ export default function LLDP() {
             </div>
           </div>
           <div class="w-full overflow-x-scroll flex flex-row justify-center items-center">
-            <table class="w-auto  min-w-full">
+            <table class="w-auto relative min-w-full">
               <thead>
                 <tr>
                   <th>Switch Port</th>
